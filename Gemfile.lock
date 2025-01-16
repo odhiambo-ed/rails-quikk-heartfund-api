@@ -92,6 +92,8 @@ GEM
       irb (~> 1.10)
       reline (>= 0.3.8)
     diff-lcs (1.5.1)
+    dockerfile-rails (1.7.2)
+      rails (>= 3.0.0)
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
@@ -332,6 +334,7 @@ DEPENDENCIES
   bootsnap
   brakeman
   debug
+  dockerfile-rails (~> 1.6, >= 1.6.8)
   dotenv-rails (~> 2.1, >= 2.1.1)
   kamal
   pg (~> 1.1)

@@ -46,6 +46,8 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 
   gem 'dotenv-rails', '~> 2.1', '>= 2.1.1'
+
+  gem 'dockerfile-rails', '~> 1.6', '>= 1.6.8'
 end
 
 # Run against this stable release
