@@ -7,10 +7,10 @@ require "uri"
 require "securerandom"
 
 class DonationsController < ApplicationController
-    QUIKK_URL = 'https://tryapi.quikk.dev/v1/mpesa/charge'
+  QUIKK_URL = 'https://tryapi.quikk.dev/v1/mpesa/charge'
   DATE_HEADER = 'date'
 
-  def create
+   def create
     donation = Donation.new(donation_params)
 
     if donation.save
@@ -55,7 +55,7 @@ class DonationsController < ApplicationController
         id: SecureRandom.uuid,
         type: 'charge',
         attributes: {
-          amount: donation.amount,
+          amount: donation.amount.to_i,  # Convert amount to integer
           posted_at: Time.now.utc.iso8601,
           reference: donation.reference,
           short_code: '174379',
@@ -65,6 +65,14 @@ class DonationsController < ApplicationController
       }
     }.to_json
 
-    client.request(request)
+    Rails.logger.info("Request Body: #{request.body}")
+    Rails.logger.info("Request Headers: #{request.to_hash}")
+
+    response = client.request(request)
+
+    Rails.logger.info("Response Code: #{response.code}")
+    Rails.logger.info("Response Body: #{response.body}")
+
+    response
   end
 end
