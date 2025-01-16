@@ -1,26 +1,32 @@
+# spec/requests/donations_spec.rb
+
 require 'rails_helper'
 
 RSpec.describe "Donations", type: :request do
   describe "POST /donations" do
     let(:valid_attributes) do
       {
-        amount: 100.00,
-        reference: "DonationRef123",
-        customer_no: "254712345678"
+        donation: {
+          amount: 100.00,
+          reference: "DonationRef123",
+          customer_no: "254712345678"
+        }
       }
     end
 
     let(:invalid_attributes) do
       {
-        amount: nil,
-        reference: "",
-        customer_no: ""
+        donation: {
+          amount: nil,  # Invalid because amount is nil
+          reference: "", # Invalid because reference is empty
+          customer_no: "" # Invalid because customer_no is empty
+        }
       }
     end
 
     context "with valid parameters" do
       it "creates a new Donation and returns success" do
-        post "/donations", params: { donation: valid_attributes }
+        post "/donations", params: valid_attributes
 
         expect(response).to have_http_status(:created)
         expect(JSON.parse(response.body)["status"]).to eq("success")
@@ -29,7 +35,7 @@ RSpec.describe "Donations", type: :request do
 
     context "with invalid parameters" do
       it "does not create a new Donation and returns errors" do
-        post "/donations", params: { donation: invalid_attributes }
+        post "/donations", params: invalid_attributes
 
         expect(response).to have_http_status(:unprocessable_entity)
         expect(JSON.parse(response.body)).to have_key("errors")
