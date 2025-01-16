@@ -1,5 +1,3 @@
-# spec/requests/donations_spec.rb
-
 require 'rails_helper'
 
 RSpec.describe "Donations", type: :request do
@@ -17,9 +15,9 @@ RSpec.describe "Donations", type: :request do
     let(:invalid_attributes) do
       {
         donation: {
-          amount: nil,  # Invalid because amount is nil
-          reference: "", # Invalid because reference is empty
-          customer_no: "" # Invalid because customer_no is empty
+          amount: nil,
+          reference: "",
+          customer_no: ""
         }
       }
     end
