@@ -7,15 +7,15 @@ require "uri"
 require "securerandom"
 
 class DonationsController < ApplicationController
-  QUIKK_URL = 'https://tryapi.quikk.dev/v1/mpesa/charge'
-  DATE_HEADER = 'date'
+  QUIKK_URL = "https://tryapi.quikk.dev/v1/mpesa/charge"
+  DATE_HEADER = "date"
 
-   def create
+  def create
     donation = Donation.new(donation_params)
 
     if donation.save
       response = make_post_request(donation)
-      render json: { status: 'success', response: response.body }, status: :created
+      render json: { status: "success", response: response.body }, status: :created
     else
       render json: { errors: donation.errors.full_messages }, status: :unprocessable_entity
     end
@@ -31,13 +31,13 @@ class DonationsController < ApplicationController
     timestamp = Time.now.httpdate
     to_encode = "#{DATE_HEADER}: #{timestamp}"
 
-    hmac = OpenSSL::HMAC.digest('SHA256', ENV['QUIKK_SECRET'], to_encode)
+    hmac = OpenSSL::HMAC.digest("SHA256", ENV["QUIKK_SECRET"], to_encode)
     encoded = Base64.strict_encode64(hmac)
     url_encoded = URI.encode_www_form_component(encoded)
 
     auth_string = %(keyId="#{ENV['QUIKK_KEY']}",algorithm="hmac-sha256",headers="#{DATE_HEADER}",signature="#{url_encoded}")
 
-    [timestamp, auth_string]
+    [ timestamp, auth_string ]
   end
 
   def make_post_request(donation)
@@ -47,20 +47,20 @@ class DonationsController < ApplicationController
     client = Net::HTTP.new(uri.host, uri.port)
     client.use_ssl = true
     request = Net::HTTP::Post.new(uri)
-    request.content_type = 'application/vnd.api+json'
+    request.content_type = "application/vnd.api+json"
     request[DATE_HEADER] = timestamp
-    request['Authorization'] = auth_string
+    request["Authorization"] = auth_string
     request.body = {
       data: {
         id: SecureRandom.uuid,
-        type: 'charge',
+        type: "charge",
         attributes: {
           amount: donation.amount.to_i,  # Convert amount to integer
           posted_at: Time.now.utc.iso8601,
           reference: donation.reference,
-          short_code: '174379',
+          short_code: "174379",
           customer_no: donation.customer_no,
-          customer_type: 'msisdn'
+          customer_type: "msisdn"
         }
       }
     }.to_json
