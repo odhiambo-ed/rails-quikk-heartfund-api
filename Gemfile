@@ -46,6 +46,9 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 
   gem 'dotenv-rails', '~> 2.1', '>= 2.1.1'
+end
 
-  gem 'rspec-rails', '~> 5.0'
+# Run against this stable release
+group :development, :test do
+  gem 'rspec-rails', '~> 7.0.0'
 end
