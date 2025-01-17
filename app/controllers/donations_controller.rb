@@ -9,6 +9,8 @@ require "securerandom"
 class DonationsController < ApplicationController
   QUIKK_URL = "https://tryapi.quikk.dev/v1/mpesa/charge"
   DATE_HEADER = "date"
+  QUIKK_KEY = "0e200aab6ea2046679b41169d74d8da3"
+  QUIKK_SECRET = "b6307e7345597f6c3d16d5bc916b4f79"
 
   def create
     donation = Donation.new(donation_params)
@@ -31,35 +33,14 @@ class DonationsController < ApplicationController
     timestamp = Time.now.httpdate
     to_encode = "#{DATE_HEADER}: #{timestamp}"
 
-    hmac = OpenSSL::HMAC.digest("SHA256", ENV["QUIKK_SECRET"], to_encode)
+    hmac = OpenSSL::HMAC.digest("SHA256", QUIKK_SECRET, to_encode)
     encoded = Base64.strict_encode64(hmac)
     url_encoded = URI.encode_www_form_component(encoded)
 
-    auth_string = %(keyId="#{ENV['QUIKK_KEY']}",algorithm="hmac-sha256",headers="#{DATE_HEADER}",signature="#{url_encoded}")
+    auth_string = %(keyId="#{QUIKK_KEY}",algorithm="hmac-sha256",headers="#{DATE_HEADER}",signature="#{url_encoded}")
 
-    [ timestamp, auth_string ]
+    [timestamp, auth_string]
   end
-
-  # def generate_hmac_signature
-  #   timestamp = Time.now.httpdate
-  #   to_encode = "#{DATE_HEADER}: #{timestamp}"
-
-  #   # Ensure the secret key is set
-  #   secret_key = ENV["QUIKK_SECRET"]
-  #   raise "QUIKK_SECRET environment variable is not set" if secret_key.nil?
-
-  #   # Ensure the key ID is set
-  #   key_id = ENV["QUIKK_KEY"]
-  #   raise "QUIKK_KEY environment variable is not set" if key_id.nil?
-
-  #   hmac = OpenSSL::HMAC.digest("SHA256", secret_key, to_encode)
-  #   encoded = Base64.strict_encode64(hmac)
-  #   url_encoded = URI.encode_www_form_component(encoded)
-
-  #   auth_string = %(keyId="#{key_id}",algorithm="hmac-sha256",headers="#{DATE_HEADER}",signature="#{url_encoded}")
-
-  #   [timestamp, auth_string]
-  # end
 
   def make_post_request(donation)
     timestamp, auth_string = generate_hmac_signature
