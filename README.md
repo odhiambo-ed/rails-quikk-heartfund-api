@@ -8,9 +8,9 @@
 
 > HeartFund API is a backend application built using Ruby on Rails, designed to facilitate donations with MPESA STK push payment integration. This project leverages the Quikk platform for its MPESA STK push integration. It provides a secure and efficient way to process donations and manage donor information.
 
-## Live Demo Link
+## Demo Link
 
-[Project Live Link](https://heartfund-api.example.com)
+[Project Link](https://github.com/odhiambo-ed/rails-quikk-heartfund-api)
 
 ## Features
 
@@ -47,7 +47,47 @@ rails db:create db:migrate
 rails server
 ```
 
+## Get Started with Docker
+
+```
+To get a clone of the project, run `https://github.com/odhiambo-ed/rails-quikk-heartfund-api.git`
+```
+```
+cd /rails-quikk-heartfund-api
+```
+```
+touch .env
+```
+#### Add the following content to the .env file:
+```
+QUIKK_KEY=your_quikk_key
+QUIKK_SECRET=your_quikk_secret
+
+POSTGRES_USER=your_db_user
+POSTGRES_PASSWORD=your_db_password
+POSTGRES_DB=your_db_name_development
+DATABASE_URL=postgres://postgres:your_db_password@db:5432/your_db_name_development
+```
+```
+rails secret //paste the rails secret to your docker-compose.yml
+```
+#### Create nad Migrate DB
+
+```
+docker-compose run web rake db:create db:migrate
+```
+
+#### Build and Run the Docker Containers
+
+```
+docker-compose build
+docker-compose up
+```
+
+
 ## Acknowledgments
+
+![Quikk](quikkapi_logo.jpeg)
 
 This project leverages the Quikk platform for its MPESA STK push integration. Quikk provides a comprehensive solution for developers and businesses seeking to amplify their digital offerings. Their platform offers:
 
@@ -61,20 +101,20 @@ For more information, visit [Quikk](https://quikk.dev/).
 
 ## Author(s)
 
-<a href="https://github.com/yourusername" target="blank"><img align="center"
-    src="https://github.com/yourusername/GitHub-User-Content/blob/main/your_photo.png"
-    alt="Your Name" height="80" width="80"/></a> **Your Name**
+  <a href="https://github.com/odhiambo-ed" target="blank"><img align="center"
+        src="https://github.com/white3d/GitHub-User-Content/blob/main/Passport_Ed-M.png"
+        alt="Edward" height="80" width="80"/></a>   **Edward Odhiambo**
 
-- GitHub: [@yourusername](https://github.com/yourusername)
-- Twitter: [@yourtwitterhandle](https://twitter.com/yourtwitterhandle)
-- LinkedIn: [Your Name](https://www.linkedin.com/in/yourlinkedinprofile/)
-- Portfolio: [Your Portfolio](https://yourportfolio.com/)
+- GitHub: [@whit3d](https://github.com/odhiambo-ed)
+- Twitter: [@odhiambo_ed](https://twitter.com/odhiambo_ed)
+- LinkedIn: [Edward Odhiambo](https://www.linkedin.com/in/edward-odhiambo/)
+- Portfolio: [Edward Odhiambo](https://edwardodhiambo.com/)
 
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!!!
 
-Feel free to check the [issues page](https://github.com/yourusername/heartfund-api/issues)
+Feel free to check the [issues page](https://github.com/odhiambo-ed/rails-quikk-heartfund-api/issues)
 
 ## Show your support
 
@@ -82,10 +122,5 @@ Give a ⭐️ if you like this project!
 
 ## 📝 License
 
-This project is [MIT](https://github.com/yourusername/heartfund-api/blob/main/LICENSE) licensed.
+This project is [MIT](https://github.com/odhiambo-ed/heartfund-api/blob/main/LICENSE) licensed.
 ```
-
-### Notes:
-- Replace placeholders like `yourusername`, `yourtwitterhandle`, `yourlinkedinprofile`, `yourportfolio.com`, and `heartfund-api.example.com` with your actual information.
-- Update the image links and live demo link as needed.
-- Ensure that the `LICENSE` file is present in your repository if you are linking to it.
