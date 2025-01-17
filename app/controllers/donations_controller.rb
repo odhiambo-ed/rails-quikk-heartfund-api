@@ -40,6 +40,27 @@ class DonationsController < ApplicationController
     [ timestamp, auth_string ]
   end
 
+  # def generate_hmac_signature
+  #   timestamp = Time.now.httpdate
+  #   to_encode = "#{DATE_HEADER}: #{timestamp}"
+
+  #   # Ensure the secret key is set
+  #   secret_key = ENV["QUIKK_SECRET"]
+  #   raise "QUIKK_SECRET environment variable is not set" if secret_key.nil?
+
+  #   # Ensure the key ID is set
+  #   key_id = ENV["QUIKK_KEY"]
+  #   raise "QUIKK_KEY environment variable is not set" if key_id.nil?
+
+  #   hmac = OpenSSL::HMAC.digest("SHA256", secret_key, to_encode)
+  #   encoded = Base64.strict_encode64(hmac)
+  #   url_encoded = URI.encode_www_form_component(encoded)
+
+  #   auth_string = %(keyId="#{key_id}",algorithm="hmac-sha256",headers="#{DATE_HEADER}",signature="#{url_encoded}")
+
+  #   [timestamp, auth_string]
+  # end
+
   def make_post_request(donation)
     timestamp, auth_string = generate_hmac_signature
 
