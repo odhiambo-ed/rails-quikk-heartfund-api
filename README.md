@@ -1,12 +1,12 @@
 ## Sneak Peek
 
-![Preview](heartfund_preview.gif)
+![Preview](heartfund.gif)
 
 # HeartFund API - Donation Platform
 
 ## Description
 
-> HeartFund API is a backend application built using Ruby on Rails, designed to facilitate donations with MPESA STK push payment integration. It provides a secure and efficient way to process donations and manage donor information.
+> HeartFund API is a backend application built using Ruby on Rails, designed to facilitate donations with MPESA STK push payment integration. This project leverages the Quikk platform for its MPESA STK push integration. It provides a secure and efficient way to process donations and manage donor information.
 
 ## Live Demo Link
 
@@ -47,6 +47,18 @@ rails db:create db:migrate
 rails server
 ```
 
+## Acknowledgments
+
+This project leverages the Quikk platform for its MPESA STK push integration. Quikk provides a comprehensive solution for developers and businesses seeking to amplify their digital offerings. Their platform offers:
+
+- **Managed Sandbox**: A pre-configured environment for developers to experiment and validate their integrations.
+- **Smart Documentation**: Accelerates developer onboarding and integration.
+- **Developer Portal**: A centralized hub for all API management needs.
+- **Managed Support**: Comprehensive support from a team of API experts.
+- **Security and Compliance**: Ensures data protection and compliance with industry regulations.
+
+For more information, visit [Quikk](https://quikk.dev/).
+
 ## Author(s)
 
 <a href="https://github.com/yourusername" target="blank"><img align="center"
@@ -67,11 +79,6 @@ Feel free to check the [issues page](https://github.com/yourusername/heartfund-a
 ## Show your support
 
 Give a ⭐️ if you like this project!
-
-## Acknowledgments
-
-- Hat tip to anyone whose code was used
-- Special thanks to [Ruby on Rails](https://rubyonrails.org/) for the amazing framework. I am grateful for your talent and generosity in sharing your work with the community.
 
 ## 📝 License
 
