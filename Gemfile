@@ -47,7 +47,7 @@ group :development, :test do
 
   gem 'dotenv-rails', '~> 2.1', '>= 2.1.1'
 
-  gem 'dockerfile-rails', '~> 1.6', '>= 1.6.8'
+  gem 'dockerfile-rails', '~> 1.7'
 end
 
 # Run against this stable release
